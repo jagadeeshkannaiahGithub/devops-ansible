@@ -2,12 +2,12 @@ provider "aws" {
 region = "eu-west-2"
 }
 resource "aws_instance" "myawsserver" {
-  ami = "ami-077e31c4939f6a2f3"
+  ami = "ami-09e5afc68eed60ef4"
   instance_type = "t2.micro"
   key_name = "ansible-master-server"
 
   tags = {
-    Name = "Techlanders-aws-ec2-instance"
+    Name = "Mcms-ec2-instance"
     env = "test"
   }
   provisioner "local-exec" {
