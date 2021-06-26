@@ -60,7 +60,6 @@ resource "aws_instance" "myawsserver" {
   subnet_id = aws_subnet.Server_subnet.id
   instance_type = "t2.micro"
   associate_public_ip_address = true
-  security_groups = ["${aws_security_group.allow_all.name}"]
   key_name = "Devops-KeyPair"
   user_data = <<-EOF
               #!/bin/bash
