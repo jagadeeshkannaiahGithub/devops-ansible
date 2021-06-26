@@ -28,6 +28,24 @@ resource "aws_internet_gateway" "Dev-igw" {
   }
 }
 
+resource "aws_default_route_table" "example" {
+  default_route_table_id = aws_vpc.aws_vpc.Devops_vpc.id.default_route_table_id
+
+  route {
+    cidr_block = "172.16.0.0/16"
+    gateway_id = aws_internet_gateway.Dev-igw.id
+  }
+
+  route {
+    ipv6_cidr_block        = "::/0"
+    egress_only_gateway_id = aws_egress_only_internet_gateway.Dev-igw.id
+  }
+
+  tags = {
+    Name = "example"
+  }
+}
+
 resource "aws_default_security_group" "default" {
   vpc_id = aws_vpc.Devops_vpc.id
 
