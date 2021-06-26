@@ -28,8 +28,8 @@ resource "aws_internet_gateway" "Dev-igw" {
   }
 }
 
-resource "aws_security_group" "allow_all" {
-  name        = "allow_all"
+resource "aws_security_group" "default" {
+  name        = "default"
   description = "Allow all inbound traffic"
   vpc_id      = aws_vpc.Devops_vpc.id
 
