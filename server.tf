@@ -27,11 +27,44 @@ resource "aws_internet_gateway" "Dev-igw" {
     Name = "main"
   }
 }
+
+resource "aws_security_group" "allow_all" {
+  name        = "allow_all"
+  description = "Allow all inbound traffic"
+  vpc_id      = aws_vpc.Devops_vpc.id
+
+  ingress {
+    description      = "TLS from VPC"
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  tags = {
+    Name = "allow_all"
+  }
+}
+
+output "securitygroup_id" {
+  value = aws_security_group.allow_all.id
+}
+
 resource "aws_instance" "myawsserver" {
   ami = "ami-09e5afc68eed60ef4"
   subnet_id = aws_subnet.Server_subnet.id
   instance_type = "t2.micro"
   associate_public_ip_address = true
+  security_group_id    = module.aws_security_group.securitygroup_id
   key_name = "Devops-KeyPair"
   user_data = <<-EOF
               #!/bin/bash
