@@ -22,4 +22,4 @@ resource "aws_instance" "myawsserver" {
    command = "echo The servers IP address is ${self.public_ip} && echo ${self.public_ip} >> /root/inv"
    depends_on = [time_sleep.wait_60_seconds]
 }
-
+}
