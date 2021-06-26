@@ -78,13 +78,7 @@ resource "aws_instance" "myawsserver" {
    
   }
   
-    provisioner "local-exec" {
-    command = "ssh-copy-id root@${self.public_ip}"
-    
-  }
-    provisioner "local-exec" {
-    command = "ssh 'root@${self.public_ip}'"
-  }
+   
 }
 
 
