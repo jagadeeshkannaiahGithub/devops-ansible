@@ -20,7 +20,7 @@ resource "aws_subnet" "Server_subnet" {
   }
 }
 
-resource "aws_internet_gateway" "Dev-igw" {
+resource "aws_internet_gateway" "Dev_gw" {
   vpc_id = aws_vpc.Devops_vpc.id
 
   tags = {
@@ -28,18 +28,12 @@ resource "aws_internet_gateway" "Dev-igw" {
   }
 }
 
-resource "aws_default_route_table" "example" {
-  default_route_table_id = aws_vpc.Devops_vpc.default_route_table_id
-
-  route {
-    cidr_block = "172.16.0.0/16"
-    gateway_id = aws_internet_gateway.Dev-igw.id
-  }
-
-  tags = {
-    Name = "example"
-  }
+resource "aws_route" "simulation_default_route" {
+  route_table_id         = "${aws_vpc.Devops_vpc.default_route_table_id}"
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = "${aws_internet_gateway.Dev_gw.id}"
 }
+
 
 resource "aws_default_security_group" "default" {
   vpc_id = aws_vpc.Devops_vpc.id
