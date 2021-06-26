@@ -20,9 +20,15 @@ resource "aws_subnet" "Server_subnet" {
   }
 }
 
+resource "aws_internet_gateway" "Dev-igw" {
+  vpc_id = aws_vpc.Devops_vpc.id
 
+  tags = {
+    Name = "main"
+  }
+}
 resource "aws_instance" "myawsserver" {
-  ami = "ami-0925a09a52d18d09a"
+  ami = "ami-09e5afc68eed60ef4"
   subnet_id = aws_subnet.Server_subnet.id
   instance_type = "t2.micro"
   associate_public_ip_address = true
