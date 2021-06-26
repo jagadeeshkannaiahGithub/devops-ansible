@@ -36,11 +36,6 @@ resource "aws_default_route_table" "example" {
     gateway_id = aws_internet_gateway.Dev-igw.id
   }
 
-  route {
-    ipv6_cidr_block        = "::/0"
-    egress_only_gateway_id = aws_egress_only_internet_gateway.Dev-igw.id
-  }
-
   tags = {
     Name = "example"
   }
