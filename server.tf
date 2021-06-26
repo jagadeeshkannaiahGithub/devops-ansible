@@ -42,6 +42,7 @@ resource "aws_instance" "myawsserver" {
               sudo sed -i 's/^PermitRootLogin*/PermitRootLogin yes/' /etc/ssh/sshd_config;
               sudo echo "PermitRootLogin yes" >> /etc/ssh/sshd_config;
               sudo systemctl restart sshd;
+              EOF
    tags = {
     Name = "Mcms-ec2-instance"
     env = "test"
