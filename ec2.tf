@@ -20,7 +20,7 @@ resource "aws_instance" "myawsserver" {
   }
  
   resource "time_sleep" "wait_60_seconds" {
-  depends_on = [null_resource.previous]
+  depends_on = [aws_instance.myawsserver]
 
   create_duration = "60s"
 }
