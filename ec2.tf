@@ -18,5 +18,8 @@ resource "aws_instance" "myawsserver" {
     Name = "Mcms-ec2-instance"
     env = "test"
   }
+    provisioner "remote-exec" {
+   command = "echo The servers IP address is ${self.public_ip} && echo ${self.public_ip} >> /root/inv"
+   depends_on = [time_sleep.wait_60_seconds]
 }
 
