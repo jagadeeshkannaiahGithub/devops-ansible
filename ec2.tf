@@ -19,11 +19,13 @@ resource "aws_instance" "myawsserver" {
     env = "test"
   }
   
-  resource "aws_ebs_volume" "myawsserver" {
-  availability_zone = "eu-east-2a"
-  size              = 10
-  }
+
     provisioner "local-exec" {
        command = "echo The servers IP address is ${self.public_ip} && echo ${self.public_ip} >> /root/inv"
   }
 }
+
+  resource "aws_ebs_volume" "myawsserver" {
+  availability_zone = "eu-east-2a"
+  size              = 10
+  }
