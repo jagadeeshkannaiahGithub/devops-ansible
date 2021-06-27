@@ -15,27 +15,19 @@ resource "aws_instance" "myawsserver" {
               sudo systemctl restart sshd;
               EOF
   
+  ebs_block_device {
+    device_name = "/dev/xvdb"
+    volume_type = "gp2"
+    volume_size = 10
+    delete_on_termination = true
+ }   
+  
    tags = {
     Name = "Mcms-ec2-instance"
     env = "test"
   }
  
-  
-  data "aws_ebs_volume" "ebs_volume" {
-  most_recent = true
-  size              = 10
-  filter {
-    name   = "volume-type"
-    values = ["gp2"]
-  }
-
-  filter {
-    name   = "tag:Name"
-    values = ["Example"]
-  }
-}
-
-  
+    
     provisioner "local-exec" {
        command = "echo The servers IP address is ${self.public_ip} && echo ${self.public_ip} >> /root/inv"
   }
