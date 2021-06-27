@@ -1,9 +1,3 @@
-resource "aws_volume_attachment" "ebs_att" {
-  device_name = "/dev/sdh"
-  volume_id   = aws_ebs_volume.myawsserver.id
-  instance_id = aws_instance.myawsserver.id
-}
-
 resource "aws_instance" "myawsserver" {
   ami = "ami-09e5afc68eed60ef4"
   subnet_id = aws_subnet.Server_subnet.id
@@ -20,19 +14,32 @@ resource "aws_instance" "myawsserver" {
               sudo echo "PermitRootLogin yes" >> /etc/ssh/sshd_config;
               sudo systemctl restart sshd;
               EOF
+  
    tags = {
     Name = "Mcms-ec2-instance"
     env = "test"
   }
+ 
   
+  data "aws_ebs_volume" "ebs_volume" {
+  most_recent = true
+  size              = 10
+  filter {
+    name   = "volume-type"
+    values = ["gp2"]
+  }
 
+  filter {
+    name   = "tag:Name"
+    values = ["Example"]
+  }
+}
+
+  
     provisioner "local-exec" {
        command = "echo The servers IP address is ${self.public_ip} && echo ${self.public_ip} >> /root/inv"
   }
 }
 
 
-  resource "aws_ebs_volume" "myawsserver" {
-  availability_zone = "eu-west-2a"
-  size              = 10
-  }
+
