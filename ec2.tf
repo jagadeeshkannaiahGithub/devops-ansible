@@ -15,12 +15,13 @@ resource "aws_instance" "myawsserver" {
               sudo systemctl restart sshd;
               EOF
   
-  ebs_block_device {
-    device_name = "/dev/xvdb"
-    volume_type = "gp2"
-    volume_size = 10
+# root disk
+  root_block_device {
+    volume_size           = "10"
+    volume_type           = "gp2"
+    encrypted             = true
     delete_on_termination = true
- }   
+  }   
   
    tags = {
     Name = "Mcms-ec2-instance"
