@@ -1,4 +1,10 @@
 resource "aws_instance" "myawsserver" {
+  depends_on        = ["aws_ebs_volume.ec2-ebs"]
+  lifecycle {
+   ignore_changes = ["tags"]
+   create_before_destroy = true
+ }
+  
   ami = "ami-09e5afc68eed60ef4"
   subnet_id = aws_subnet.Server_subnet.id
   instance_type = "t2.micro"
