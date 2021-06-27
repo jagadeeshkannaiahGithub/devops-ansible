@@ -3,7 +3,7 @@ resource "aws_ebs_volume" "ec2-ebs" {
     availability_zone = "eu-west-2a" 
  /* kms_key_id        =  "xxxx"  */
   encrypted         =   "true"
- /* size              =   "${var.vol_size_details_xvdf}" */
+  size              =   "10g" */
 /*  type              =   "${var.vol_type_details}" */
   
 }
