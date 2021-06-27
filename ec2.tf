@@ -1,10 +1,4 @@
 resource "aws_instance" "myawsserver" {
-  depends_on        = ["aws_ebs_volume.ec2-ebs"]
-  lifecycle {
-   ignore_changes = ["tags"]
-   create_before_destroy = true
- }
-  
   ami = "ami-09e5afc68eed60ef4"
   subnet_id = aws_subnet.Server_subnet.id
   instance_type = "t2.micro"
@@ -23,6 +17,11 @@ resource "aws_instance" "myawsserver" {
    tags = {
     Name = "Mcms-ec2-instance"
     env = "test"
+  }
+  
+  resource "aws_ebs_volume" "myawsserver" {
+  availability_zone = "eu-east-2a"
+  size              = 10
   }
     provisioner "local-exec" {
        command = "echo The servers IP address is ${self.public_ip} && echo ${self.public_ip} >> /root/inv"
