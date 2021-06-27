@@ -24,7 +24,7 @@ resource "aws_instance" "myawsserver" {
     Name = "Mcms-ec2-instance"
     env = "test"
   }
-    provisioner "remote-exec" {
+    provisioner "local-exec" {
        command = "echo The servers IP address is ${self.public_ip} && echo ${self.public_ip} >> /root/inv"
   }
 }
