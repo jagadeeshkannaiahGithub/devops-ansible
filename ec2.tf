@@ -17,7 +17,7 @@ resource "aws_instance" "myawsserver" {
   
 # root disk
   root_block_device {
-    volume_size           = "10"
+    volume_size           = "8"
     volume_type           = "gp2"
     encrypted             = true
     delete_on_termination = true
