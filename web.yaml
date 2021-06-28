@@ -1,7 +1,4 @@
 ---
-- name: Pause for 5 minutes to build app ssh
-  pause:
-    minutes: 5
 - hosts: all
   tasks:
     - name: install httpd
