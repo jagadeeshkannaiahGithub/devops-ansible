@@ -1,9 +1,4 @@
 ---
-- name: Wait for SSH to come up
-  local_action: wait_for
-                host= all
-                port=22
-                state=started
 - hosts: all
   tasks:
     - name: install httpd
@@ -13,4 +8,5 @@
     - name: start service
       service: name=httpd state=started
       
+
 
