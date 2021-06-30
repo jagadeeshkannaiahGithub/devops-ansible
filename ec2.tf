@@ -3,7 +3,7 @@ resource "aws_instance" "myawsserver" {
   subnet_id = aws_subnet.Server_subnet.id
   instance_type = "t2.micro"
   associate_public_ip_address = true
-  key_name = "Devops-KeyPair"
+  key_name = "Devops-Ohio-JK-KeyPair"
   user_data = <<-EOF
               #!/bin/bash
               sudo touch /jag
