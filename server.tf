@@ -24,7 +24,7 @@ resource "aws_internet_gateway" "Dev_gw" {
   vpc_id = aws_vpc.Devops_vpc.id
 
   tags = {
-    Name = "main"
+    Name = "Dev_gw"
   }
 }
 
