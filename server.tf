@@ -14,7 +14,7 @@ resource "aws_vpc" "Devops_vpc" {
 resource "aws_subnet" "Server_subnet" {
   vpc_id            = aws_vpc.Devops_vpc.id
   cidr_block        = "172.16.10.0/24"
-  availability_zone = "eu-west-2a"
+  availability_zone = "us-east-2a"
   tags = {
     Name = "tf-example"
   }
