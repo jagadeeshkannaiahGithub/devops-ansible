@@ -4,7 +4,7 @@
     - name: install httpd
       package: name=httpd state=installed
     - name: configure
-      shell: "echo hello Yesssssssssssss I did it!!!!!!!!!!!!!  >> /var/www/html/index.html"
+      shell: "echo hello Yesssssssssssss I completed it!!!!!!!!!!!!!  >> /var/www/html/index.html"
     - name: start service
       service: name=httpd state=started
       
