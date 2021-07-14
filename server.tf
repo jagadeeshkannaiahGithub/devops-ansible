@@ -3,11 +3,11 @@ region = "eu-west-2"
 
 }
 
-resource "aws_vpc" "AIA-Devops_vpc" {
+resource "aws_vpc" "Devops_vpc" {
   cidr_block = "172.16.0.0/16"
 
   tags = {
-    Name = "Devops_vpc"
+    Name = "AIA-Devops_vpc"
   }
 }
 
